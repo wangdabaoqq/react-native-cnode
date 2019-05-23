@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
 import Home from './src/views/Home'
+import Detail from './src/views/Detail'
 class App extends Component {
   render () {
     return (
@@ -114,6 +115,9 @@ const AppNavigator = createStackNavigator(
   {
     Tab: { 
       screen: Tab
+     },
+     Detail: {
+       screen: Detail
      }
     // Web: { screen: WebScene },
     // GroupPurchase: { screen: GroupPurchaseScene },
