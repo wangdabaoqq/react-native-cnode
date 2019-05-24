@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import {Platform, StyleSheet, Text, View, InteractionManager, Image, TouchableOpacity } from 'react-native';
 import RefreshListView, { RefreshState } from 'react-native-refresh-list-view'
 import { Button } from '@ant-design/react-native';
+import { fillterTime } from '../../utils'
 import Nav from '../../components/Nav'
 // import axios from 'axios'
 import { getALl } from '../../config/api'
-var moment = require('moment');
-import 'moment/locale/zh-cn'
-export default class Home extends Component {
+import { connect } from 'react-redux'
+// var moment = require('moment');
+// import 'moment/locale/zh-cn'
+ class Home extends Component {
   constructor () {
     super()
     this.state = {
@@ -81,9 +83,9 @@ export default class Home extends Component {
   onFooterRefresh = () => {
     this.setState({ refreshState: RefreshState.HeaderRefreshing })
   }
-  fillterTime = (time) => {
-    return moment(time).fromNow()
-  }
+  // fillterTime = (time) => {
+  //   return moment(time).fromNow()
+  // }
   onHeaderRefresh = () => {
     // console.log(this.state.params);
     // console.log(this.state.params.page);
@@ -101,7 +103,7 @@ export default class Home extends Component {
   }
   onPress (data) {
     // this.props.na
-    this.props.navigation.navigate('Detail', { data, getTime: this.fillterTime })
+    this.props.navigation.navigate('Detail', { data })
     // console.warn(this.props.navigation.state.params);
     
   }
@@ -122,7 +124,7 @@ export default class Home extends Component {
           <Text>{data.author.loginname}</Text>
           <View style={{flex: 1, flexDirection: 'row'}}>
           <Text>
-            {this.fillterTime(data.create_at)} 
+            {fillterTime(data.create_at)} 
           </Text>
           <Text onPress={this.onPress} style={{color: '#009688', marginLeft: 4}}>
               #分享#
@@ -163,7 +165,7 @@ export default class Home extends Component {
           </View>
           <View style={styles.cloumn}>
           <Image source={require('../../assets/time.png')} style={{marginRight: 4}}></Image>
-          <Text>{this.fillterTime(data.last_reply_at)}</Text>
+          <Text>{fillterTime(data.last_reply_at)}</Text>
           </View>
         </View>
         </TouchableOpacity>
@@ -192,6 +194,15 @@ export default class Home extends Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  console.log(state);
+  
+  return {
+    dataList: state.dataList
+  }
+}
+Home = connect(mapStateToProps)(Home)
+export default Home
 const styles = StyleSheet.create({
   icon: {
     width: 27,

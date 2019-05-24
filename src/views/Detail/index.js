@@ -4,6 +4,8 @@ import { View, Text, ScrollView, TouchableOpacity,
 // import HTMLView from 'react-native-htmlview';
 import HTML from 'react-native-render-html';
 import { getDetail } from '../../config/api'
+import { fillterTime } from '../../utils'
+
 export default class Detail extends Component {
   constructor (props) {
     // console.log(props);
@@ -62,9 +64,9 @@ export default class Detail extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: navigation.state.params.data.title
   })
-  fillterTime = (time) => {
-    return moment(time).fromNow()
-  }
+  // fillterTime = (time) => {
+  //   return moment(time).fromNow()
+  // }
   componentDidMount() {
     this.allDetail()
     InteractionManager.runAfterInteractions(() => {
@@ -94,19 +96,20 @@ export default class Detail extends Component {
       // console.log(this.state.dataList);
       // console.log(data, data.replies); 
       return (
+        data && data.replies ? 
         <View style={{flex: 1,
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'stretch',}}>  
           <ScrollView style={{padding: 6}}>
           <HTML renderers={this.state.renderers} html={data.content} tagsStyles={this.state.tagsStyles} classesStyles={this.state.classesStyles}  imagesMaxWidth={Dimensions.get('window').width} />
-          { data && data.replies ? 
+          {/* { data && data.replies ?  */}
             <View style={{borderTopWidth: 1, borderBottomWidth: 1, borderTopColor: '#ccc', borderBottomColor: '#ccc', paddingVertical: 10}}>
               <Text style={{color: '#009688',  fontSize: 18}}>评论({data.replies.length})</Text> 
               </View>
-          : null }
+          {/* : null } */}
           {
-            (data && data.replies) && data.replies.length > 0 && data.replies.map((ele, index) => 
+             data.replies.map((ele, index) => 
               <View key={index} style={{ paddingVertical: 10, borderBottomColor: '#ccc', borderBottomWidth: 1}}>
               <View style={{flex: 1, flexDirection: 'row',}}>
                 <Image
@@ -119,7 +122,7 @@ export default class Detail extends Component {
                     {ele.author.loginname}
                   </Text>
                   <Text>
-                    {index + 1}楼 {this.props.navigation.state.params.getTime(ele.create_at)}
+                    {index + 1}楼 {fillterTime(ele.create_at)}
                   </Text>
                 </View>
                 </View>
@@ -139,6 +142,7 @@ export default class Detail extends Component {
           }
           </ScrollView>
         </View>
+        : null
         // </View>
       )
     // }

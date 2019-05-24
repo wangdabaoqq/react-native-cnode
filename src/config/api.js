@@ -1,6 +1,8 @@
 // export default {
 const all = 'https://cnodejs.org/api/v1/topics'
 const alldetail = 'https://cnodejs.org/api/v1/topic'
+const access = `https://cnodejs.org/api/v1/accesstoken`
+const userinfo = `https://cnodejs.org/api/v1/user/`
 // }
 import axios from 'axios'
 
@@ -10,8 +12,9 @@ export function getALl (params) {
   // }
   // console.log(url);
   // url = getUrl(params, url)
-  return axios(all, {
-    methods: 'get',
+  return axios({
+    url: all,
+    method: 'get',
     params
     // body: JSON.stringify(params)
   })
@@ -20,8 +23,24 @@ export function getDetail (id) {
   
     return axios({
       url: `${alldetail}/${id}`,
-      methods: 'get'
+      method: 'get'
       // params
+    })
+  }
+
+  export function getAccess (accesstoken) {
+    return axios({
+      url:access,
+      method: 'post',
+      data: {
+        accesstoken
+      }
+    })
+  }
+  export function getUsers (user) {
+    return axios({
+      url: `${userinfo}${user}`,
+      method: 'get'
     })
   }
   export function getUrl (params, url) {

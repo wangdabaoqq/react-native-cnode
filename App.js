@@ -9,11 +9,26 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
+import { getSession } from './src/utils'
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
+import Info from './src/views/Info'
+import Me from './src/views/Me'
+import { Provider } from 'react-redux'
+// AsyncStorage.setItem('userinfo', 'I like to save it.')
+// const storeUserinfo = AsyncStorage.getItem('userinfo')
+// let islogin
+// console.log(this);
+getSession('loginname')
+// let a = getSession('loginname')
+// console.log(a._55, a);
+
+// console.log(AsyncStorage.getItem('userinfo'));
+
 class App extends Component {
   render () {
     return (
+      <Provider store={store}>
       <AppContainer
         onNavigationStateChange={
           (prevState, currentState) => {
@@ -30,6 +45,7 @@ class App extends Component {
           }
         }
       />
+      </Provider>
     )
   }
 }
@@ -51,8 +67,8 @@ const Tab = createBottomTabNavigator(
         )
       }),
     },
-    Nearby: {
-      screen: createStackNavigator({ Nearby: Home }),
+    Publish: {
+      screen: createStackNavigator({ publish: Home }),
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: '发布',
         tabBarIcon: ({ focused, tintColor }) => (
@@ -62,8 +78,8 @@ const Tab = createBottomTabNavigator(
       }),
     },
 
-    Order: {
-      screen: createStackNavigator({ Order: Home }),
+    Message: {
+      screen: createStackNavigator({ message: Home }),
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: '消息',
         tabBarIcon: ({ focused, tintColor }) => (
@@ -73,7 +89,7 @@ const Tab = createBottomTabNavigator(
       }),
     },
     Mine: {
-      screen: createStackNavigator({ Mine: Home }),
+      screen: createStackNavigator({ Mine:  Me }),
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: '我的',
         tabBarIcon: ({ focused, tintColor }) => (
@@ -83,7 +99,8 @@ const Tab = createBottomTabNavigator(
       }),
     },
     Info: {
-      screen: createStackNavigator({ Mine: Home }),
+      screen: createStackNavigator({ Info: Info }),
+      paths: 'people/:name',
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: '关于',
         tabBarIcon: ({ focused, tintColor }) => (
