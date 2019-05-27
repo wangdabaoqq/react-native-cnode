@@ -7,6 +7,7 @@ import Nav from '../../components/Nav'
 // import axios from 'axios'
 import { getALl } from '../../config/api'
 import { connect } from 'react-redux'
+import { loadData, removePrev } from '../../store'
 // var moment = require('moment');
 // import 'moment/locale/zh-cn'
  class Home extends Component {
@@ -39,9 +40,12 @@ import { connect } from 'react-redux'
     // console.log(this.state.params.tab);
     
     if (item.value !== this.state.params.tab) {
-      this.setState({
-        dataList: []
-      })
+      // this.setState({
+      //   dataList: []
+      // })
+      this.props.removePrev()
+      
+      // this.props.state = []
     }
     // console.log(item);
     
@@ -64,16 +68,16 @@ import { connect } from 'react-redux'
     
     this.setState({ refreshState: RefreshState.FooterRefreshing })
     getALl(query).then((res) => {
-      // res.json().then((data) => {
-        // console.log(data);
-        console.log(res);
         
       let datas = res.data.data
+      // console.log(this.props);
+      
       this.setState({
-        dataList: [...this.state.dataList, ...datas],
+        // dataList: [...this.state.dataList, ...datas],
         params: query,
         refreshState: RefreshState.NoMoreData
       })
+      this.props.onSubmit(datas)
       // })
     })
   }
@@ -98,7 +102,6 @@ import { connect } from 'react-redux'
         page: this.state.params.page++
       }
     })
-    console.log(this.state.params);
     this.getAxios(this.state.params)
   }
   onPress (data) {
@@ -173,11 +176,14 @@ import { connect } from 'react-redux'
     )
   }
   render () {
+    // let { dataList } = this.props.state
+    // console.log(this.props);
+    
     return (
       <View style={styles.header}>
         <Nav getData={this.getData}></Nav>
        <RefreshListView
-            data={this.state.dataList}
+            data={this.props.dataList}
             keyExtractor={this.keyExtractor}
             renderItem={this.renderCell}
             refreshState={this.state.refreshState}
@@ -195,13 +201,21 @@ import { connect } from 'react-redux'
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
-  
   return {
     dataList: state.dataList
   }
 }
-Home = connect(mapStateToProps)(Home)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (data) => {
+      dispatch(loadData(data))
+    },
+    removePrev: (data) => {
+      dispatch(removePrev(data))
+    }
+  }
+}
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 export default Home
 const styles = StyleSheet.create({
   icon: {

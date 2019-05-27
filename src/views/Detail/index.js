@@ -5,8 +5,8 @@ import { View, Text, ScrollView, TouchableOpacity,
 import HTML from 'react-native-render-html';
 import { getDetail } from '../../config/api'
 import { fillterTime } from '../../utils'
-
-export default class Detail extends Component {
+import { connect } from 'react-redux'
+ class Detail extends Component {
   constructor (props) {
     // console.log(props);
     super(props)
@@ -69,6 +69,7 @@ export default class Detail extends Component {
   // }
   componentDidMount() {
     this.allDetail()
+    
     InteractionManager.runAfterInteractions(() => {
       this.props.navigation.setParams({ title: '加载中' })
       // this.setState({ source: { uri: this.props.navigation.state.params.url } })
@@ -149,6 +150,14 @@ export default class Detail extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    dataList: state.dataList
+  }
+}
+export default connect(
+  mapStateToProps
+)(Detail)
 const styles = StyleSheet.create({
   h2: {
   //  backgroundColor: 'red',

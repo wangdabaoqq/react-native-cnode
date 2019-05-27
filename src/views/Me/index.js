@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { getAccess, getUsers } from '../../config/api'
 // import axios from 'axios'
 import { fillterTime, removeSession } from '../../utils'
+import { connect } from 'react-redux'
+import { getLoginName, removeLogin } from '../../store'
 
 import AsyncStorage from '@react-native-community/async-storage'
 import {Button, StyleSheet, Text, View, TextInput, Image } from 'react-native';
-export default class Me extends Component {
+class Me extends Component {
   constructor () {
     super()
     this.state = {
@@ -23,12 +25,11 @@ export default class Me extends Component {
   getInfo () {
     getUsers(this.state.loginname).then((res) => {
       let datas = res.data.data
-      console.log(datas);
       this.setState({
         data: datas
       })
       console.log(this.state.data);
-      
+      this.props.onSubmit(datas.loginname)
     })
   }
   getUser = () => {
@@ -39,6 +40,7 @@ export default class Me extends Component {
         loginname: data.loginname
       })
       AsyncStorage.setItem('loginname', data.loginname)
+
       this.getInfo()
     })
     // getUsers(this.state.loginname).then((res) => {
@@ -60,6 +62,7 @@ export default class Me extends Component {
         loginname: '',
         data: null
       })
+      this.props.removeLogin('')
     })
     // let loginname = AsyncStorage.removeItem('loginname').then((error) => {
     //   // console.log(error);
@@ -157,3 +160,22 @@ export default class Me extends Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  console.log(state);
+  
+  return {
+    login: state.login,
+    // dataList: state.dataList
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (data) => {
+      dispatch(getLoginName(data))
+    },
+    removeLogin: (data) => {
+      dispatch(removeLogin(data))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Me)
