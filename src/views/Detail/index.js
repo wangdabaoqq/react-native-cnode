@@ -76,6 +76,14 @@ import { connect } from 'react-redux'
       // this.setState({ source: { uri: this.props.navigation.state.params.url } })
     })
   }
+  isLogin = () => {
+    let { login, navigation } = this.props
+    if (login === '') {
+      navigation.navigate('Mine')
+    }
+    // console.log(this.props.lohi);
+    
+  }
   allDetail (props) {
     let id = this.props.navigation.state.params.data.id
     getDetail(id).then((res) => {
@@ -131,9 +139,7 @@ import { connect } from 'react-redux'
                 </View>
                 </View>
                 <View style={styles.share}>
-                  <TouchableOpacity onPress={() => {
-                    // this.onPress(data)
-                    }}>
+                  <TouchableOpacity onPress={this.isLogin}>
                     <Text style={{color: '#009688'}}>回复</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>

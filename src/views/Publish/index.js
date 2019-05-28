@@ -110,8 +110,9 @@ this.inputRefs = {
             textAlignVertical: 'top'}}
           multiline={true}></TextInput>
         </View>
-        <View style={{marginTop: 10}}>
-          <TouchableOpacity style={{backgroundColor: '#009688', borderRadius: 4}}>
+        <View style={{marginTop: 10, fontSize: 12}}>
+          <TouchableOpacity style={{backgroundColor: '#009688', 
+          borderRadius: 4}}>
           {/* <Image source={require('../../assets/time.png')}></Image> */}
           <Button
           title="发布话题"
