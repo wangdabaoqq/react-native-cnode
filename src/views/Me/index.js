@@ -28,7 +28,6 @@ class Me extends Component {
       this.setState({
         data: datas
       })
-      console.log(this.state.data);
       this.props.onSubmit(datas.loginname)
     })
   }
@@ -165,7 +164,7 @@ const mapStateToProps = (state) => {
   
   return {
     login: state.login,
-    // dataList: state.dataList
+    dataList: state.dataList
   }
 }
 const mapDispatchToProps = (dispatch) => {

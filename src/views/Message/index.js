@@ -14,7 +14,7 @@ export default class Message extends Component {
     // const actives = this.state.isactive === index ? styles.active : ''
     return (
         <View>
-          <Text>111</Text>
+          <Text>消息</Text>
         </View>
     )
   }

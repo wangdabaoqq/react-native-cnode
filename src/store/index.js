@@ -9,7 +9,7 @@ const REMOVE_PREV = 'REMOVE_PREV'
 
 // reducer
 export default function (state, action) {
-  console.log(action);
+  // console.log(action.dataList, state.da);
   
   if (!state) {
     state = { 
@@ -17,26 +17,28 @@ export default function (state, action) {
       login: ''
      }
   }
+  
   switch (action.type) {
-    case INIT_COMMENTS:
-      // 初始化评论
-      return { dataList: action.dataList }
     case LOAD_DATA:
-      // 新增评论
-      return {
+      // 初始化评论
+      return { 
+        ...state,
         dataList: [...state.dataList, ...action.dataList]
-      }
+       }
     case GET_LOGINNAME:
       return {
+        ...state,
         login: action.name
       }
     case REMOVE_LOGIN:
       return {
+        ...state,
         login: action.name
       }
     case REMOVE_PREV:
       return {
-        dataList: []
+        // dataList: [],
+        ...state
       }
     case DELETE_COMMENT:
       // 删除评论

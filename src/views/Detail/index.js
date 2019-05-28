@@ -69,6 +69,7 @@ import { connect } from 'react-redux'
   // }
   componentDidMount() {
     this.allDetail()
+    console.log(11111, '测试');
     
     InteractionManager.runAfterInteractions(() => {
       this.props.navigation.setParams({ title: '加载中' })
@@ -94,6 +95,8 @@ import { connect } from 'react-redux'
     // console.log(this.state.isLoaded);
     // if (this.state.isLoaded) {
       let data = this.state.dataList
+      console.log(this.props);
+      
       // console.log(this.state.dataList);
       // console.log(data, data.replies); 
       return (
@@ -133,7 +136,10 @@ import { connect } from 'react-redux'
                     }}>
                     <Text style={{color: '#009688'}}>回复</Text>
                     </TouchableOpacity>
-                    <Text>🖤{ele.ups.length}</Text>
+                    <TouchableOpacity>
+                      <Text>
+                        🖤{ele.ups.length}</Text>
+                    </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, flexDirection: 'column',}}>
                     <HTML renderers={this.state.renderers} html={ele.content} tagsStyles={this.state.tagsStyles} classesStyles={this.state.classesStyles}  imagesMaxWidth={Dimensions.get('window').width} />                  
@@ -151,8 +157,11 @@ import { connect } from 'react-redux'
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
+  
   return {
-    dataList: state.dataList
+    dataList: state.dataList,
+    login: state.login
   }
 }
 export default connect(

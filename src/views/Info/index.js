@@ -14,7 +14,7 @@ export default class Info extends Component {
     // const actives = this.state.isactive === index ? styles.active : ''
     return (
         <View>
-          <Text>111</Text>
+          <Text>关于</Text>
         </View>
     )
   }

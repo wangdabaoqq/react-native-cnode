@@ -31,6 +31,7 @@ import { loadData, removePrev } from '../../store'
     // }
   })
   componentWillMount () {
+    this.props.navigation.setParams({ queryData: () => { this.getAxios(this.state.params); } });//在导航中添加查询数据的方法，设置一个钩子
     InteractionManager.runAfterInteractions(() => {
       this.getAxios(this.state.params)
     })
@@ -39,14 +40,16 @@ import { loadData, removePrev } from '../../store'
   getData = (item, index) => {
     // console.log(this.state.params.tab);
     
-    if (item.value !== this.state.params.tab) {
-      // this.setState({
-      //   dataList: []
-      // })
-      this.props.removePrev()
+    // if (item.value !== this.state.params.tab) {
+    //   // this.setState({
+    //   //   dataList: []
+    //   // })
+    //   console.log(111);
       
-      // this.props.state = []
-    }
+    //   this.props.removePrev()
+      
+    //   // this.props.state = []
+    // }
     // console.log(item);
     
     this.setState({
@@ -77,6 +80,7 @@ import { loadData, removePrev } from '../../store'
         params: query,
         refreshState: RefreshState.NoMoreData
       })
+      
       this.props.onSubmit(datas)
       // })
     })

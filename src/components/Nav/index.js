@@ -1,18 +1,49 @@
 import React, { Component } from 'react'
 // import { getALl } from '../../config/api'
 // import axios from 'axios'
-import {Platform, StyleSheet, Text, View, Dimensions, findNodeHandle } from 'react-native';
+import {
+  UIManager, StyleSheet, Text, View, Animated, findNodeHandle } from 'react-native';
+  // const AnimatedTouchableWithoutFeedback = Animated.createAnimatedComponent(TouchableWithoutFeedback);
+
 export default class Nav extends Component {
   constructor () {
     super()
     this.state = {
       // dataList: [],
-      isactive: 0
+      fadeAnim: new Animated.Value(0),
+      isactive: 0,
+      TextWidth: 0,
+      Left: 0,
+      start: null
     }
   }
+  componentDidMount () {
+    setTimeout(() => {
+      this.getComponentWidth().then((data) => {
+        this.setState({
+          TextWidth: data
+        })
+      })
+  }, 200)
+  }
+  getComponentWidth () {
+    return new Promise((resolve, reject) => {
+      const handle = findNodeHandle(this.refs.text1)
+      UIManager.measure(handle,(x, y, width, height, pageX, pageY)=>{
+        // comWidth = width
+        resolve(width)
+      })
+    })
+    // console.log(comWidth);
+  }
+
   getData (item, index) {
-    this.setState({
-      isactive: index
+    this.getComponentWidth().then((data) => {
+      this.setState({
+        TextWidth: data,
+        isactive: index,
+        Left: index * data
+      })
     })
     this.props.getData(item, index)
   }
@@ -43,18 +74,37 @@ export default class Nav extends Component {
         value: 'job'
       }
     ]
+    let { fadeAnim } = this.state;
     // const actives = this.state.isactive === index ? styles.active : ''
     return (
+      // <AnimatedTouchableWithoutFeedback>
+        // <Animated.View style={{transform: [{
+        //   translateY: this.state.fadeAnim.interpolate({
+        //     inputRange: [0, 1],
+        //     outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+        //   }),
+        // }],}}>
         <View style={styles.contain}>
+          {/* <AnimatedTouchableWithoutFeedback */}
           {
             menuList.map((ele, index) => 
-              <Text  key={index} style={[styles.list, this.state.isactive === index ? styles.active : '']} onPress={ () => this.getData(ele, index)}>
+              <Text
+              ref='text1'
+              key={index} style={[styles.list, this.state.isactive === index ? styles.active : '']} onPress={ () => this.getData(ele, index)}>
               {ele.text}
               </Text>
             )
+            // <View style={[styles.block, {width: this.state.TextWidth}]}></View>
           }
-          <Text style={styles.block}></Text>
+          {/* <Animated.View style={[styles.block, {width: this.state.TextWidth, left: this.state.fadeAnim.interpolate({
+            outputRange:[0, this.state.Left],
+            inputRange:[0,1],
+            })}]}>
+          </Animated.View> */}
+          <View style={[styles.block, {width: this.state.TextWidth, transform: [{translateX: this.state.Left}]}]}>
+          </View>
         </View>
+        // </AnimatedTouchableWithoutFeedback>
     )
   }
 }
@@ -104,7 +154,8 @@ const styles = StyleSheet.create({
     // color: '#fff',
     backgroundColor: 'red',
     bottom: 0,
-    transform: [{translateX: 0}],
+    height: 2
+    // transform: [{translateX: 0}],
     // width: '14%'
   }
 })

@@ -8,12 +8,15 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, StatusBar } from 'react-native';
-import { createStackNavigator, NavigationActions, createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
+import { createStackNavigator, NavigationActions,  createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
 import { getSession } from './src/utils'
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
 import Info from './src/views/Info'
 import Me from './src/views/Me'
+import Message from './src/views/Message'
+import Publish from './src/views/Publish'
+
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Index from './src/store'
@@ -36,55 +39,17 @@ store.subscribe(() => {
 
 // console.log(AsyncStorage.getItem('userinfo'));
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {
-      nav: '',
-      login: store.getState().login
-    }
-  }
   render () {
-    console.log(this.state.login);
+    // console.log(this.state.login);
     
     // console.log(store.getState());
     // const AppContainer = createAppContainer(AppNavigator(store));
     return (
       <Provider store={store}>
       <AppContainer
-        ref={navigatorRef => {
-          this.state.nav = navigatorRef
-        }}
         onNavigationStateChange={
           (prevState, currentState, action) => {
             StatusBar.setBarStyle('dark-content')
-            console.log(action);
-            // this.state.nav.dispatch(SwitchActions.jumpTo({ routeName: action.routeName }))
-            // setTopLevelNavigator(this.state.nav);
-          // navigate('Home')
-            // console.log(prevState, currentState);
-            // console.log(this.state.nav);
-            
-            // let state = store.getState().login
-            // if (state !== '') {
-            //   // this.state.nav
-            //   console.log(this.state.nav);
-            //     this.state.nav._navigation.navigate('Mine')
-              
-            //   // this.state.nav._navigation.dispatch(
-            //   //   // this.state.nav._navigation.push('Mine')
-            //   // )
-            NavigationActions.navigate({ routeName: 'Detail' })  
-            // }
-            // this.state.nav._navigation.navigate('')
-            // const currentScene = getCurrentRouteName(currentState)
-            // const previousScene = getCurrentRouteName(prevState)
-            // if (previousScene !== currentScene) {
-            //   if (lightContentScenes.indexOf(currentScene) >= 0) {
-            //     StatusBar.setBarStyle('light-content')
-            //   } else {
-            //     StatusBar.setBarStyle('dark-content')
-            //   }
-            // }
           }
         }
       />
@@ -98,12 +63,19 @@ function Tab(params) {
   return createBottomTabNavigator(
     {
       Home: {
-        screen: createStackNavigator({ Home }),
+        screen: createStackNavigator({ home: Home }),
         navigationOptions: ({ navigation }) => ({
           tabBarLabel: '首页',
-          // title: '111',
-          // headerTitle: null,
-          // headerBackTitle: null,
+          tabBarOnPress: ({defaultHandler, navigation}) => {
+            // console.log(defaultHandler);
+            // console.log(1111);
+            // navigation.navigate('Home')  
+            // console.log(navigation);
+            //  console.log(navigation.state.routes[0]);
+             
+            navigation.state.routes[0].params.queryData();//查询数据         
+            defaultHandler()
+          },
           tabBarIcon: ({ focused, tintColor }) => (
             //   normalImage='https://www.easyicon.net/api/resizeApi.php?id=1225464&size=16' 
             // normalImage={require('./src/assets/tabbar_merchant.png')}
@@ -113,14 +85,14 @@ function Tab(params) {
         }),
       },
       Publish: {
-        screen: createStackNavigator({ publish: Home }),
+        screen: createStackNavigator({ publish: Publish }),
         navigationOptions: ({ navigation }) => ({
           tabBarLabel: '发布',
-          tabBarOnPress: ({defaultHandler, navigation}) => {
-            // console.log(defaultHandler);
-            jundeLogin(defaultHandler, navigation)
+          // tabBarOnPress: ({defaultHandler, navigation}) => {
+          //   // console.log(defaultHandler);
+          //   // jundeLogin(defaultHandler, navigation)
             
-          },
+          // },
           tabBarIcon: ({ focused, tintColor }) => (
             <Image style={{tintColor, width: 25, height: 25 }} source={ require('./src/assets/publish.png')}></Image>
   
@@ -129,7 +101,7 @@ function Tab(params) {
       },
   
       Message: {
-        screen: createStackNavigator({ message: Home }),
+        screen: createStackNavigator({ message: Message }),
         navigationOptions: ({ navigation }) => ({
           tabBarLabel: '消息',
           tabBarOnPress: ({defaultHandler, navigation}) => {
@@ -176,10 +148,6 @@ function Tab(params) {
       lazy: true,
       animationEnabled: false,
       swipeEnabled: false,
-      onTransitionStart: (start) => {
-        console.log(strat);
-        
-      },
       tabBarOptions: {
         activeTintColor: 'red',
         inactiveTintColor: 'green',
@@ -209,6 +177,8 @@ function AppNavigator(store) {
     login = store.getState().login
     
   }
+  console.log(Tabs);
+  
   // console.log(store.getState().login);
   return createStackNavigator(
     {
