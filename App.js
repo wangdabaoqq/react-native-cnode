@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, StatusBar } from 'react-native';
-import { createStackNavigator, NavigationActions,  createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
+import { createStackNavigator, NavigationActions, StackViewTransitionConfigs,  createBottomTabNavigator, createAppContainer, TabBarBottom } from 'react-navigation'
 import { getSession } from './src/utils'
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
@@ -24,7 +24,9 @@ import Index from './src/store'
 // const storeUserinfo = AsyncStorage.getItem('userinfo')
 // let islogin
 // console.log(this);
-getSession('loginname')
+// getSession('loginname')
+const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
+
 const store = createStore(Index)
 store.subscribe(() => {
   //监听state变化
@@ -65,7 +67,9 @@ function Tab(params) {
       Home: {
         screen: createStackNavigator({ home: Home }),
         navigationOptions: ({ navigation }) => ({
-          tabBarLabel: '首页',
+          // tabBarVisible: false,
+          // header: null,
+          tabBarLabel: '发布',
           tabBarOnPress: ({defaultHandler, navigation}) => {
             // console.log(defaultHandler);
             // console.log(1111);
@@ -156,6 +160,19 @@ function Tab(params) {
       },
     })
 }
+const IOS_MODAL_ROUTES = ['home', 'Info']
+const dynamicModalTransition = (transitionProps, prevTransitionProps) => {
+  const isModal = IOS_MODAL_ROUTES.some(
+    screenName =>
+      screenName === transitionProps.scene.route.routeName ||
+      (prevTransitionProps && screenName === prevTransitionProps.scene.route.routeName)
+  )
+  return StackViewTransitionConfigs.defaultTransitionConfig(
+    transitionProps,
+    prevTransitionProps,
+    isModal
+  );
+};
 
 function jundeLogin (defaultHandler, navigation) {
   let login = this.params.getState().login
@@ -170,15 +187,29 @@ function jundeLogin (defaultHandler, navigation) {
 // };
 function AppNavigator(store) {
   let Tabs = Tab(store)
+  console.log(Tabs);
+  
   Tabs.navigationOptions = {
     header: null,
+    // header: { visible: false },
+    // headerStyle: {
+    //   backgroundColor: 'yellow',
+    // },
+    // headerTitleStyle:{
+    //   alignSelf:'center',
+    //   textAlign: 'center',
+    //   flex:1,
+    // },
+    // headerTitleContainerStyle:{
+    //   left: TITLE_OFFSET,
+    //   right: TITLE_OFFSET,
+    // }
   };
   let login
   if (store) {
     login = store.getState().login
     
   }
-  console.log(Tabs);
   
   // console.log(store.getState().login);
   return createStackNavigator(
@@ -191,33 +222,20 @@ function AppNavigator(store) {
        }
     },
     {
+    //   transitionConfig: dynamicModalTransition,
       defaultNavigationOptions: {
-        headerBackTitle: null,
+        // headerBackTitle: null,
+        // header: null,
+        // headerStyle: {
+        //   backgroundColor: '#f4511e',
+        // },
         headerTintColor: '#333333',
-        showIcon: true,
+        showIcon: false,
       },
     }
   )
 }
-// const AppNavigator = createStackNavigator(
-//   {
-//     Tab: { 
-//       screen: Tab
-//      },
-//      Detail: {
-//        screen: Detail
-//      }
-//     // Web: { screen: WebScene },
-//     // GroupPurchase: { screen: GroupPurchaseScene },
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerBackTitle: null,
-//       headerTintColor: '#333333',
-//       showIcon: true,
-//     },
-//   }
-// )
+
 
 let AppContainer = createAppContainer(AppNavigator())
 // const AppContainer = createAppContainer(AppNavigator());

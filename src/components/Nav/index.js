@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 // import { getALl } from '../../config/api'
 // import axios from 'axios'
 import {
-  UIManager, StyleSheet, Text, View, Animated, findNodeHandle } from 'react-native';
+  UIManager, StyleSheet, Platform,
+  Text, View, Animated, findNodeHandle } from 'react-native';
   // const AnimatedTouchableWithoutFeedback = Animated.createAnimatedComponent(TouchableWithoutFeedback);
-
+  
 export default class Nav extends Component {
   constructor () {
     super()
@@ -123,9 +124,9 @@ const styles = StyleSheet.create({
   },
   contain: {
     flexDirection: 'row',
-    marginTop: 40,
+    marginTop: Platform.OS === 'ios' ?  40 : 0,
     backgroundColor: '#009688',
-    height: 60
+    height: 60 
     // flex: 1,
         // flexDirection: 'column',
         // justifyContent: 'center',

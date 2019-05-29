@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {Platform, StyleSheet, ScrollView, TouchableOpacity, Text, View, TextInput, Image, Button } from 'react-native';
 // let { width } = Dimensions.get("window");
 import RNPickerSelect from 'react-native-picker-select';
-console.log(Platform.OS);
 
 // console.log(width);
 export default class Publish extends Component {

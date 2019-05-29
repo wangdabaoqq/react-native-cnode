@@ -4,9 +4,10 @@ import { getAccess, getUsers } from '../../config/api'
 import { fillterTime, removeSession } from '../../utils'
 import { connect } from 'react-redux'
 import { getLoginName, removeLogin } from '../../store'
+const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 
 import AsyncStorage from '@react-native-community/async-storage'
-import {Button, StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import {Button, StyleSheet, Platform, Text, View, TextInput, Image } from 'react-native';
 class Me extends Component {
   constructor () {
     super()
@@ -20,7 +21,21 @@ class Me extends Component {
     }
   }
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: '登录'
+    headerTitle: '登录',
+    headerTitleStyle: {
+      alignSelf:'center',
+      textAlign: 'center',
+      flex:1,
+    },
+    headerTitleContainerStyle:{
+      left: TITLE_OFFSET,
+      right: TITLE_OFFSET,
+    },
+    // headerTitleStyle: {
+    //   alignSelf:'center',
+    //   textAlign: 'center',
+    //   flex:1,
+    // }
   })
   getInfo () {
     getUsers(this.state.loginname).then((res) => {
@@ -131,7 +146,7 @@ class Me extends Component {
           // marginTop: 60,
           // marginLeft: 60,
           // marginRight: 60,
-          paddingVertical: 10,
+          paddingVertical: 6,
           borderBottomColor: '#eee',
           // flex: 1, flexDirection: 'column', 
           borderBottomWidth: 1 }}>
@@ -147,9 +162,8 @@ class Me extends Component {
         <View style={{backgroundColor: '#009688', marginTop: 4, borderRadius:4 }}>
             <Button
             onPress={this.getUser}
-            color='#fff'
+            color={Platform.OS === 'ios' ? '#fff' : '#009688'}
             title="登录">
-
             </Button>
           </View>
         </View>

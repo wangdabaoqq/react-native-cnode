@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 // import { getALl } from '../../config/api'
 // import axios from 'axios'
-import {ScrollView, StyleSheet, Text, View, TouchableOpacity, Linking, Image, Dimensions } from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Platform, TouchableOpacity, Linking, Image, Dimensions } from 'react-native';
 let { width } = Dimensions.get("window");
+const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 export default class Info extends Component {
   constructor () {
     super()
@@ -13,9 +14,16 @@ export default class Info extends Component {
   }
   static navigationOptions = ({ navigation }) => ({
     headerTitle: '关于',
-    // headerBackImage: (
-    //   <Image source={require('../../../node_modules/react-navigation-stack/src/views/assets/back-icon.png')}></Image>
-    // ),
+    headerTitleStyle: {
+      alignSelf:'center',
+      textAlign: 'center',
+      flex:1,
+    },
+    headerTitleContainerStyle:{
+      left: TITLE_OFFSET,
+      right: TITLE_OFFSET,
+    },
+    // headerRight:React.createElement(View, null, null),
     headerLeft: (
       <TouchableOpacity
         style={{paddingHorizontal: 4}}
