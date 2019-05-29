@@ -88,11 +88,11 @@ function Tab(params) {
         screen: createStackNavigator({ publish: Publish }),
         navigationOptions: ({ navigation }) => ({
           tabBarLabel: '发布',
-          // tabBarOnPress: ({defaultHandler, navigation}) => {
-          //   // console.log(defaultHandler);
-          //   // jundeLogin(defaultHandler, navigation)
+          tabBarOnPress: ({defaultHandler, navigation}) => {
+            // console.log(defaultHandler);
+            jundeLogin(defaultHandler, navigation)
             
-          // },
+          },
           tabBarIcon: ({ focused, tintColor }) => (
             <Image style={{tintColor, width: 25, height: 25 }} source={ require('./src/assets/publish.png')}></Image>
   
@@ -129,12 +129,13 @@ function Tab(params) {
         screen: createStackNavigator({ Info:  Info }),
         // paths: 'people/:name',
         navigationOptions: ({ navigation }) => ({
-          tabBarLabel: '关于',
-          tabBarOnPress: ({defaultHandler, navigation}) => {
-            // console.log(defaultHandler);
-            jundeLogin(defaultHandler, navigation)
+          title: '关于',
+          tabBarVisible: false,
+          // tabBarOnPress: ({defaultHandler, navigation}) => {
+          //   // console.log(defaultHandler);
+          //   jundeLogin(defaultHandler, navigation)
             
-          },
+          // },
           tabBarIcon: ({ focused, tintColor }) => (
             <Image style={{tintColor, width: 25, height: 25 }} source={ require('./src/assets/info.png') }></Image>
   
@@ -187,13 +188,7 @@ function AppNavigator(store) {
        },
        Detail: {
          screen: Detail
-       },
-      //  onTransitionStart: (start) => {
-      //   console.log(strat);
-        
-      // },
-      // Web: { screen: WebScene },
-      // GroupPurchase: { screen: GroupPurchaseScene },
+       }
     },
     {
       defaultNavigationOptions: {

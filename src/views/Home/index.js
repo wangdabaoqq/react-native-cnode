@@ -40,16 +40,16 @@ import { loadData, removePrev } from '../../store'
   getData = (item, index) => {
     // console.log(this.state.params.tab);
     
-    // if (item.value !== this.state.params.tab) {
-    //   // this.setState({
-    //   //   dataList: []
-    //   // })
-    //   console.log(111);
+    if (item.value !== this.state.params.tab) {
+      // this.setState({
+      //   dataList: []
+      // })
+      // console.log(111);
       
-    //   this.props.removePrev()
+      this.props.removePrev()
       
     //   // this.props.state = []
-    // }
+    }
     // console.log(item);
     
     this.setState({
@@ -73,7 +73,7 @@ import { loadData, removePrev } from '../../store'
     getALl(query).then((res) => {
         
       let datas = res.data.data
-      // console.log(this.props);
+      console.log(datas);
       
       this.setState({
         // dataList: [...this.state.dataList, ...datas],

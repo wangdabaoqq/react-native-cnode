@@ -37,8 +37,8 @@ export default function (state, action) {
       }
     case REMOVE_PREV:
       return {
-        // dataList: [],
-        ...state
+        ...state,
+        dataList: []
       }
     case DELETE_COMMENT:
       // 删除评论
@@ -75,7 +75,7 @@ export const removeLogin = (name) => {
   
   return { type: REMOVE_LOGIN, name }
 }
-export const removePrev = (name) => {
+export const removePrev = (data) => {
   
-  return { type: REMOVE_PREV, name }
+  return { type: REMOVE_PREV, data }
 }

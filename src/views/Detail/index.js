@@ -82,6 +82,8 @@ import { connect } from 'react-redux'
       navigation.navigate('Mine')
     }
     // console.log(this.props.lohi);
+  }
+  giveTop = () => {
     
   }
   allDetail (props) {
@@ -142,9 +144,10 @@ import { connect } from 'react-redux'
                   <TouchableOpacity onPress={this.isLogin}>
                     <Text style={{color: '#009688'}}>回复</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.giveTop}>
                       <Text>
-                        🖤{ele.ups.length}</Text>
+                        🖤
+                        {ele.ups.length}</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{flex: 1, flexDirection: 'column',}}>
