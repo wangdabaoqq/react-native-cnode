@@ -23,10 +23,14 @@
     当然也要配置环境。
   ```  
 ### 地址
+  [环境配置] (https://reactnative.cn/docs/getting-started/)
   [安卓打包教程](https://reactnative.cn/docs/signed-apk-android/)
   <!-- <a href="./package/app-release.apk">android-apk</a> -->
   [android-apk地址](./package/app-release.apk) 
-
+### 热更新
+  目前没有涉及服务器, 热更新的功能没有做。
+  但我去了解了下, 我应该会去采用code-push的方式去更新。
+  当我做热更新的时候我会再来这里补充。
 ### 展示
 ios: <img src="./screenshot/5月-31-2019 15-19-57.gif">
 android: <img src="./screenshot/5月-31-2019 16-12-11.gif">
