@@ -5,7 +5,7 @@
   
 ### 使用
   ```js
-    不管你是用windows还是mac都是要配置环境的, 如果没有配置环境, 项目是无法启动的,推荐按照官网配置环境和npm包。
+    不管你是用windows还是mac都是要配置环境的, 如果没有配置环境, 项目是无法启动的, 推荐按照官网配置环境和npm包。
     项目克隆: git clone https://github.com/wangdabaoqq/react-native-cnode.git
     安装依赖: yarn || npm install
     android: react-native run-android
@@ -24,5 +24,8 @@
   ```  
 ### 地址
   [安卓打包教程]('https://reactnative.cn/docs/signed-apk-android/')
-  [apk]('./src/package/app-release.apk')
+  [apk]('./package/app-release.apk')
 
+### 展示
+ios: <img src="./screenshot/5月-31-2019 15-19-57.gif">
+android: <img src="./screenshot/5月-31-2019 16-12-11.gif">
