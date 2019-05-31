@@ -4,12 +4,14 @@
   >  react-native-cnode是由react-native搭建的项目, 由于之前做过vue版本的cnode, 对于cnnode的api也比较了解, api方面就采用了cnode。
 
 ### npm包介绍
+```
 * react-native-refresh-list-view 上拉加载与下拉加载
 * react-redux 数据存储
 * react-native-render-html 解析html
 * axios request
 * moment time format
 * react-navigation tabBottom jump
+```
 
 ### 使用
   ```js
