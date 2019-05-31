@@ -23,8 +23,8 @@
     当然也要配置环境。
   ```  
 ### 地址
-  [安卓打包教程]('https://reactnative.cn/docs/signed-apk-android/')
-  <a href="https://github.com/wangdabaoqq/react-native-cnode/package/app-release.apk">android-apk</a>
+  [安卓打包教程](https://reactnative.cn/docs/signed-apk-android/)
+  <a href="./package/app-release.apk">android-apk</a>
 
 ### 展示
 ios: <img src="./screenshot/5月-31-2019 15-19-57.gif">
