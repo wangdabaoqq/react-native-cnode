@@ -24,7 +24,7 @@
   ```  
 ### 地址
   [安卓打包教程]('https://reactnative.cn/docs/signed-apk-android/')
-  [apk]('./package/app-release.apk')
+  <a href="./package/app-release.apk">android-apk</a>
 
 ### 展示
 ios: <img src="./screenshot/5月-31-2019 15-19-57.gif">
