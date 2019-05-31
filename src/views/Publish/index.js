@@ -41,6 +41,10 @@ this.inputRefs = {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: '发布话题'
   })
+  onFocus=() => {
+    const {onFocus} = this.props;
+    onFocus && onFocus();
+  }
   render () {
     const placeholder = {}
 
@@ -63,7 +67,7 @@ this.inputRefs = {
     },
     ]
     return (
-        <ScrollView style={styles.contain}>
+        <ScrollView style={styles.contain} onPress={() => { Keyboard.dismiss(); }} >
           {/* <View style={{flexDirection: 'column', flex: 1}}> */}
           <Text>选择板块</Text>
           <RNPickerSelect
@@ -100,6 +104,7 @@ this.inputRefs = {
           placeholder="输入内容"
           value={this.state.text}
           maxLength = {40}
+          onFocus={this.onFocus}
           onChangeText={(text) => this.setState({text})}
           style={{
             height: 200,
@@ -115,7 +120,7 @@ this.inputRefs = {
           {/* <Image source={require('../../assets/time.png')}></Image> */}
           <Button
           title="发布话题"
-          color="#fff"
+          color={Platform.OS === 'ios' ? '#fff' : '#009688'}
            />
            </TouchableOpacity>
         </View>

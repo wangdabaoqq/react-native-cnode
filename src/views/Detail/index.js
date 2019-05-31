@@ -23,7 +23,10 @@ import { connect } from 'react-redux'
         },
         p: {
           fontSize: 14,
-          margin: 8
+          // lineHeight: 20,
+          // color: 'red',
+          // margin: 20
+          // padding: 10
         },
         pre: {
           flexDirection: 'column',
@@ -115,7 +118,7 @@ import { connect } from 'react-redux'
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'stretch',}}>  
-          <ScrollView style={{padding: 6}}>
+          <ScrollView style={{padding: 6, flex:1}}>
           <HTML renderers={this.state.renderers} html={data.content} tagsStyles={this.state.tagsStyles} classesStyles={this.state.classesStyles}  imagesMaxWidth={Dimensions.get('window').width} />
           {/* { data && data.replies ?  */}
             <View style={{borderTopWidth: 1, borderBottomWidth: 1, borderTopColor: '#ccc', borderBottomColor: '#ccc', paddingVertical: 10}}>

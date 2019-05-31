@@ -20,12 +20,13 @@ import Publish from './src/views/Publish'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Index from './src/store'
+// import codePush from 'react-native-code-push'
 // AsyncStorage.setItem('userinfo', 'I like to save it.')
 // const storeUserinfo = AsyncStorage.getItem('userinfo')
 // let islogin
 // console.log(this);
 // getSession('loginname')
-const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
+// const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 
 const store = createStore(Index)
 store.subscribe(() => {
@@ -41,6 +42,23 @@ store.subscribe(() => {
 
 // console.log(AsyncStorage.getItem('userinfo'));
 class App extends Component {
+  // componentDidMount () {
+  //   codePush.sync({
+  //     updateDialog: {
+  //       appendReleaseDescription: true,
+  //       descriptionPrefix: '',
+  //       mandatoryUpdateMessage: '',
+  //       mandatoryContinueButtonLabel: '立即更新',
+  //       optionalIgnoreButtonLabel: '稍后',
+  //       optionalInstallButtonLabel: '后台更新',
+  //       optionalUpdateMessage: '',
+  //       title: '更新提示'
+  //     },
+  //     installMode: codePush.InstallMode.IMMEDIATE,
+  //     mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+  //     deploymentKey: '4a4ca83f-18e2-4262-be4c-b8d8e548049e'
+  //   })
+  // }
   render () {
     // console.log(this.state.login);
     
@@ -224,7 +242,7 @@ function AppNavigator(store) {
     {
     //   transitionConfig: dynamicModalTransition,
       defaultNavigationOptions: {
-        // headerBackTitle: null,
+        headerBackTitle: null,
         // header: null,
         // headerStyle: {
         //   backgroundColor: '#f4511e',
