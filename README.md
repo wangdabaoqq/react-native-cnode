@@ -1,6 +1,14 @@
-## react-native-cnode
+
   <!-- ![](./screenshot/icon-above-font.png) -->
-  <img src="./screenshot/icon-above-font.png" width=256 height=256 />
+  <p align="center">
+  <img src="./screenshot/icon-above-font.png" width=50 height=50 />
+  </p>
+<img src="https://img.shields.io/badge/react--native-0.59.8-green.svg">
+<img src="https://img.shields.io/badge/react-16.8.3-green.svg">
+<img src="https://img.shields.io/badge/react--navigation-3.11.0-green.svg">
+<img src="https://img.shields.io/badge/axios-0.18.0-green.svg">
+<h2 align="center">react-native-cnode</h2>
+
 ### 项目简介
   >  react-native-cnode是由react-native搭建的项目, 由于之前做过vue版本的cnode, 对于cnnode的api也比较了解, api方面就采用了cnode。
 
