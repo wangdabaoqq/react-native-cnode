@@ -1,5 +1,6 @@
 ## react-native-cnode
-  ![](./screenshot/icon-above-font.png)
+  <!-- ![](./screenshot/icon-above-font.png) -->
+  <img src="./screenshot/icon-above-font.png" width=256 height=256 />
 ### 项目简介
   >  react-native-cnode是由react-native搭建的项目, 由于之前做过vue版本的cnode, 对于cnnode的api也比较了解, api方面就采用了cnode。
 
